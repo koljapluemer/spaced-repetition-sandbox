@@ -15,3 +15,15 @@ describe('Flashcard.vue', () => {
     expect(wrapper.find('.front').text()).toBe('front')
   })
 })
+
+// check for a text saying "3 cards due." in LearnScreen
+describe('LearnScreen.vue', () => {
+  it('displays the text "3 cards due"', () => {
+    const wrapper = shallowMount(LearnScreen, {
+      props: {
+        cards: []
+      }
+    })
+    expect(wrapper.find('.due-cards').text()).toBe('3 cards due.')
+  })
+})
