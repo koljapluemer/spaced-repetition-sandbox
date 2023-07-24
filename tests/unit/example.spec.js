@@ -21,7 +21,7 @@ describe('LearnScreen.vue', () => {
   it('displays the text "3 cards due"', () => {
     const wrapper = shallowMount(LearnScreen, {
       props: {
-        cards: []
+        cards: [{}, {}, {}]
       }
     })
     expect(wrapper.find('.due-cards').text()).toBe('3 cards due.')

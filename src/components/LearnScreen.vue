@@ -1,6 +1,6 @@
 <template>
   Welcome!
-  <span class="due-cards">3 cards due.</span>
+  <span class="due-cards">{{ cards.length }} cards due.</span>
 
   <Flashcard :card="props.cards[0]" />
 </template>
