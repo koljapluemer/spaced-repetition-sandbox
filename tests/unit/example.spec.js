@@ -86,3 +86,19 @@ describe('Flashcard.vue', () => {
     expect(wrapper.emitted('cardGraded')[0][0]).toBe(0)
   })
 })
+
+// check for Flashcard emitting a 1 score event when "Right" is clicked
+describe('Flashcard.vue', () => {
+  it('emits a 1 score event when "Right" is clicked', () => {
+    const wrapper = shallowMount(Flashcard, {
+      props: {
+        card: {
+          front: 'front'
+        }
+      }
+    })
+    wrapper.find('#right').trigger('click')
+    expect(wrapper.emitted('cardGraded')).toBeTruthy()
+    expect(wrapper.emitted('cardGraded')[0][0]).toBe(1)
+  })
+})
