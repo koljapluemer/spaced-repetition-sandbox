@@ -70,3 +70,19 @@ describe('LearnScreen.vue', () => {
     expect(wrapper.find('.due-cards').text()).toBe('2 cards due.')
   })
 })
+
+// check for Flashcard emitting a 0 score event when "Wrong" is clicked
+describe('Flashcard.vue', () => {
+  it('emits a 0 score event when "Wrong" is clicked', () => {
+    const wrapper = shallowMount(Flashcard, {
+      props: {
+        card: {
+          front: 'front'
+        }
+      }
+    })
+    wrapper.find('#wrong').trigger('click')
+    expect(wrapper.emitted('cardGraded')).toBeTruthy()
+    expect(wrapper.emitted('cardGraded')[0][0]).toBe(0)
+  })
+})
