@@ -2,7 +2,7 @@
   Welcome!
   <span class="due-cards">{{ dueCards.length }} cards due.</span>
 
-  <Flashcard :card="dueCards[0]" />
+  <Flashcard :card="dueCards[0]" @cardGraded="gradeCard" />
 </template>
 
 <script setup lang="js">
@@ -20,6 +20,18 @@ const dueCards = computed(() => {
     return !card.dueAt || card.dueAt <= new Date()
   })
 })
+
+// function to grade a card
+// 1. update the card's dueAt, interval and repetition
+function gradeCard(grade) {
+  const card = dueCards.value[0]
+  const now = new Date()
+
+  card.dueAt = new Date(now.setDate(now.getDate() + card.interval))
+  card.interval *= 2
+  card.repetitions.push(grade)
+}
+
 
 
 </script>
