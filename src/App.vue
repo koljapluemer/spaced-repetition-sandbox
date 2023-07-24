@@ -1,16 +1,13 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Flashcard :card="card" />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup lang="js">
+import Flashcard from './components/Flashcard.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+const card = {
+  front: 'What is the capital of Canada?',
+  back: 'Ottawa',
 }
 </script>
 

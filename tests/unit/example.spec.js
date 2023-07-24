@@ -12,11 +12,16 @@ describe('HelloWorld.vue', () => {
   })
 })
 
-// test whether Flashcard has a .front class
+// test whether Flashcard displays the passed in prob card.front correctly within .front
 describe('Flashcard.vue', () => {
-  it('has a .front class', () => {
-    const wrapper = shallowMount(Flashcard)
-    expect(wrapper.classes()).toContain('front')
+  it('displays the passed in prob card.front correctly within .front', () => {
+    const wrapper = shallowMount(Flashcard, {
+      props: {
+        card: {
+          front: 'front'
+        }
+      }
+    })
+    expect(wrapper.find('.front').text()).toBe('front')
   })
 })
-
