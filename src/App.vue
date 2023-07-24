@@ -1,14 +1,35 @@
 <template>
-  <Flashcard :card="card" />
+  <LearnScreen :cards=cards />
 </template>
 
 <script setup lang="js">
-import Flashcard from './components/Flashcard.vue'
 
-const card = {
-  front: 'What is the capital of Canada?',
-  back: 'Ottawa',
-}
+import LearnScreen from './components/LearnScreen.vue'
+
+
+const cards = [
+  {
+  front: "Eswatini",
+  back: "Mbabane",
+  dueAt: null,
+  interval: 1,
+  repetitions: []
+  },
+  {
+  front: "Eritrea",
+  back: "Asmara",
+  dueAt: null,
+  interval: 1,
+  repetitions: []
+  },
+  {
+  front: "Ethiopia",
+  back: "Addis Ababa",
+  dueAt: null,
+  interval: 1,
+  repetitions: []
+  },
+]
 </script>
 
 <style>

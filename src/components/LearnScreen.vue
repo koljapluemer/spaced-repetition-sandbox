@@ -1,14 +1,16 @@
 <template>
-  <div class="paper m4">
-    <div class="front">{{ props.card.front }}</div>
-  </div>
+  Welcome!
+
+  <Flashcard :card="props.cards[0]" />
 </template>
 
 <script setup lang="js">
-
+import Flashcard from '@/components/Flashcard.vue'
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  card: Object,
+  cards: Array,
 })
+
+
 </script>

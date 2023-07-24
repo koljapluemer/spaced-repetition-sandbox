@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import Flashcard from '@/components/Flashcard.vue'
+import LearnScreen from '@/components/LearnScreen.vue'
 
 // test whether Flashcard displays the passed in prob card.front correctly within .front
 describe('Flashcard.vue', () => {
