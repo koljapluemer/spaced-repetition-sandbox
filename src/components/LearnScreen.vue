@@ -2,10 +2,10 @@
   Welcome!
   <span class="due-cards">{{ getDueCards().length }} cards due.</span>
 
-  <Flashcard :card="card" @cardGraded="gradeCard" />
+  <Flashcard :card="card" @cardGraded="gradeCard" v-if="card" />
 
   <ul>
-  <li v-for="card in cards" :key="card">{{ card }}</li>
+    <li v-for="card in cards" :key="card">{{ card }}</li>
   </ul>
 </template>
 
@@ -50,13 +50,18 @@ function gradeCard(grade) {
   card.value.repetitions.push(grade)
 
   setCardToRandomDue()
-  
+
 }
 
 function setCardToRandomDue() {
   // get due objects from cards and pick a random one
   const dueCards = getDueCards()
+  if (dueCards.length === 0) {
+  card.value = null
+  return
+  } else {
   card.value = dueCards[Math.floor(Math.random() * dueCards.length)]
+}
 }
 
 
@@ -66,7 +71,4 @@ function getDueCards() {
 
 
 setCardToRandomDue()
-
-
-
 </script>
