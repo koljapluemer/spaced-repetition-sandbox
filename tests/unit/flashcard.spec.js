@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import Flashcard from '@/components/Flashcard.vue'
 
 
@@ -32,7 +32,7 @@ describe('Flashcard.vue', () => {
 
 // check for Flashcard emitting a 0 score event when "Wrong" is clicked
 describe('Flashcard.vue', () => {
-  it('emits a 0 score event when "Wrong" is clicked', () => {
+  it('emits a 0 score event when "Wrong" is clicked', async () => {
     const wrapper = shallowMount(Flashcard, {
       props: {
         card: {
@@ -41,10 +41,8 @@ describe('Flashcard.vue', () => {
       }
     })
     expect(wrapper.find('#reveal').exists()).toBe(true)
-    wrapper.find('#reveal').trigger('click')
-    // wait for the transition to finish
-    wrapper.vm.$nextTick()
-    wrapper.find('#wrong').trigger('click')
+    await wrapper.find('#reveal').trigger('click')
+    await wrapper.find('#wrong').trigger('click')
     expect(wrapper.emitted('cardGraded')).toBeTruthy()
     expect(wrapper.emitted('cardGraded')[0][0]).toBe(0)
   })
@@ -52,7 +50,7 @@ describe('Flashcard.vue', () => {
 
 // check for Flashcard emitting a 1 score event when "Right" is clicked
 describe('Flashcard.vue', () => {
-  it('emits a 1 score event when "Right" is clicked', () => {
+  it('emits a 1 score event when "Right" is clicked', async () => {
     const wrapper = shallowMount(Flashcard, {
       props: {
         card: {
@@ -61,9 +59,8 @@ describe('Flashcard.vue', () => {
       }
     })
     expect(wrapper.find('#reveal').exists()).toBe(true)
-    wrapper.find('#reveal').trigger('click')
-    wrapper.vm.$nextTick()
-    wrapper.find('#right').trigger('click')
+    await wrapper.find('#reveal').trigger('click')
+    await wrapper.find('#right').trigger('click')
     expect(wrapper.emitted('cardGraded')).toBeTruthy()
     expect(wrapper.emitted('cardGraded')[0][0]).toBe(1)
   })
@@ -71,8 +68,8 @@ describe('Flashcard.vue', () => {
 
 // check for flashcard first having a 'Reveal' button, then a 'Wrong' and 'Right' button after clicking 'Reveal'
 describe('Flashcard.vue', () => {
-  it('has a "Reveal" button, then a "Wrong" and "Right" button after clicking "Reveal"', () => {
-    const wrapper = shallowMount(Flashcard, {
+  it('has a "Reveal" button, then a "Wrong" and "Right" button after clicking "Reveal"', async () => {
+    const wrapper = mount(Flashcard, {
       props: {
         card: {
           front: 'front'
@@ -80,7 +77,7 @@ describe('Flashcard.vue', () => {
       }
     })
     expect(wrapper.find('#reveal').exists()).toBe(true)
-    wrapper.find('#reveal').trigger('click')
+    await wrapper.find('#reveal').trigger('click')
     expect(wrapper.find('#wrong').exists()).toBe(true)
     expect(wrapper.find('#right').exists()).toBe(true)
   })

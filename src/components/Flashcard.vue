@@ -2,7 +2,7 @@
   <div class="paper m4">
     <div class="front">{{ props.card.front }}</div>
   </div>
-  <button id="reveal" v-if="!isRevealed" @click="isRevealed = true">
+  <button id="reveal" v-if="!isRevealed" @click="reveal()">
     Reveal
   </button>
   <button id="wrong" v-if="isRevealed" @click="$emit('cardGraded', 0)">
@@ -22,4 +22,9 @@ const props = defineProps({
 })
 
 const isRevealed = ref(false)
+
+function reveal() {
+  isRevealed.value = true
+}
+
 </script>
