@@ -81,6 +81,8 @@ describe('Flashcard.vue', () => {
         }
       }
     })
+    expect(wrapper.find('#reveal').exists()).toBe(true)
+    wrapper.find('#reveal').trigger('click')
     wrapper.find('#wrong').trigger('click')
     expect(wrapper.emitted('cardGraded')).toBeTruthy()
     expect(wrapper.emitted('cardGraded')[0][0]).toBe(0)
@@ -97,8 +99,27 @@ describe('Flashcard.vue', () => {
         }
       }
     })
+    expect(wrapper.find('#reveal').exists()).toBe(true)
+    wrapper.find('#reveal').trigger('click')
     wrapper.find('#right').trigger('click')
     expect(wrapper.emitted('cardGraded')).toBeTruthy()
     expect(wrapper.emitted('cardGraded')[0][0]).toBe(1)
+  })
+})
+
+// check for flashcard first having a 'Reveal' button, then a 'Wrong' and 'Right' button after clicking 'Reveal'
+describe('Flashcard.vue', () => {
+  it('has a "Reveal" button, then a "Wrong" and "Right" button after clicking "Reveal"', () => {
+    const wrapper = shallowMount(Flashcard, {
+      props: {
+        card: {
+          front: 'front'
+        }
+      }
+    })
+    expect(wrapper.find('#reveal').exists()).toBe(true)
+    wrapper.find('#reveal').trigger('click')
+    expect(wrapper.find('#wrong').exists()).toBe(true)
+    expect(wrapper.find('#right').exists()).toBe(true)
   })
 })
