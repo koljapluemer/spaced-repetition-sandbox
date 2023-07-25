@@ -1,8 +1,8 @@
 <template>
   Welcome!
-  <span class="due-cards">{{ dueCards.length }} cards due.</span>
+  <span class="due-cards">{{ getDueCards().length }} cards due.</span>
 
-  <Flashcard :card="dueCards[0]" @cardGraded="gradeCard" />
+  <Flashcard :card="card" @cardGraded="gradeCard" />
 
   <ul>
   <li v-for="card in cards" :key="card">{{ card }}</li>
@@ -11,31 +11,61 @@
 
 <script setup lang="js">
 import Flashcard from '@/components/Flashcard.vue'
-import { defineProps, computed } from 'vue'
+import { ref } from 'vue'
 
-const props = defineProps({
-  cards: Array,
-})
+const cards = [
+  {
+  front: "Eswatini",
+  back: "Mbabane",
+  dueAt: null,
+  interval: 1,
+  repetitions: []
+  },
+  {
+  front: "Eritrea",
+  back: "Asmara",
+  dueAt: null,
+  interval: 1,
+  repetitions: []
+  },
+  {
+  front: "Ethiopia",
+  back: "Addis Ababa",
+  dueAt: null,
+  interval: 1,
+  repetitions: []
+  },
+]
 
-// computed property with only due cards
-// filter by dueAt being either in the past or null
-const dueCards = computed(() => {
-  return props.cards.filter(card => {
-    return !card.dueAt || card.dueAt <= new Date()
-  })
-})
 
+const card = ref({})
 // function to grade a card
 // 1. update the card's dueAt, interval and repetition
 function gradeCard(grade) {
   console.log('gradeCard', grade)
-  const card = dueCards.value[0]
   const now = new Date()
 
-  card.dueAt = new Date(now.setDate(now.getDate() + card.interval))
-  card.interval *= 2
-  card.repetitions.push(grade)
+  card.value.dueAt = new Date(now.setDate(now.getDate() + card.value.interval))
+  card.value.interval *= 2
+  card.value.repetitions.push(grade)
+
+  setCardToRandomDue()
+  
 }
+
+function setCardToRandomDue() {
+  // get due objects from cards and pick a random one
+  const dueCards = getDueCards()
+  card.value = dueCards[Math.floor(Math.random() * dueCards.length)]
+}
+
+
+function getDueCards() {
+  return cards.filter(card => card.dueAt <= new Date() || card.dueAt === null)
+}
+
+
+setCardToRandomDue()
 
 
 

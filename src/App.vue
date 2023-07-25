@@ -1,5 +1,5 @@
 <template>
-  <LearnScreen :cards=cards />
+  <LearnScreen />
 </template>
 
 <script setup lang="js">
@@ -7,29 +7,7 @@
 import LearnScreen from './components/LearnScreen.vue'
 
 
-const cards = [
-  {
-  front: "Eswatini",
-  back: "Mbabane",
-  dueAt: null,
-  interval: 1,
-  repetitions: []
-  },
-  {
-  front: "Eritrea",
-  back: "Asmara",
-  dueAt: null,
-  interval: 1,
-  repetitions: []
-  },
-  {
-  front: "Ethiopia",
-  back: "Addis Ababa",
-  dueAt: null,
-  interval: 1,
-  repetitions: []
-  },
-]
+
 </script>
 
 <style>
