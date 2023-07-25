@@ -3,6 +3,10 @@
   <span class="due-cards">{{ dueCards.length }} cards due.</span>
 
   <Flashcard :card="dueCards[0]" @cardGraded="gradeCard" />
+
+  <ul>
+  <li v-for="card in cards" :key="card">{{ card }}</li>
+  </ul>
 </template>
 
 <script setup lang="js">
@@ -24,6 +28,7 @@ const dueCards = computed(() => {
 // function to grade a card
 // 1. update the card's dueAt, interval and repetition
 function gradeCard(grade) {
+  console.log('gradeCard', grade)
   const card = dueCards.value[0]
   const now = new Date()
 
