@@ -45,9 +45,20 @@ function gradeCard(grade) {
   console.log('gradeCard', grade)
   const now = new Date()
 
-  card.value.dueAt = new Date(now.setDate(now.getDate() + card.value.interval))
-  card.value.interval *= 2
-  card.value.repetitions.push(grade)
+  // if grade is 1, double interval
+  //  if grade is 0, half interval (minimum: 1)
+
+  if (grade === 1) {
+  card.value.interval = card.value.interval * 2
+  } else {
+  card.value.interval = Math.max(card.value.interval / 2, 1)
+  }
+  // set dueAt to now + interval in seconds
+  card.value.dueAt = new Date(now.getTime() + card.value.interval * 1000)
+  card.value.repetitions.push({
+    grade: grade,
+    date: now,
+  })
 
   setCardToRandomDue()
 

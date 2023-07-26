@@ -82,4 +82,3 @@ describe('Flashcard.vue', () => {
     expect(wrapper.find('#right').exists()).toBe(true)
   })
 })
-
