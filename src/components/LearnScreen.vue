@@ -4,7 +4,7 @@
 
   <Flashcard :card="card" @cardGraded="gradeCard" v-if="card" />
 
-  <ul>
+  <ul class="mt4">
     <li v-for="card in cards" :key="card">{{ card }}</li>
   </ul>
 </template>
@@ -80,6 +80,13 @@ function getDueCards() {
   return cards.filter(card => card.dueAt <= new Date() || card.dueAt === null)
 }
 
-
 setCardToRandomDue()
+
+// if currently no due card, regularly recheck if there is now a due card
+setInterval(() => {
+  if (!card.value) {
+  setCardToRandomDue()
+  }
+}, 1000)
+
 </script>
